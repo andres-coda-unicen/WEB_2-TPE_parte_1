@@ -1,0 +1,57 @@
+<?php $pageTitle = 'Admin — Productos'; ?>
+<?php require __DIR__ . '/../componentes/header.phtml'; ?>
+
+<div class="admin-header">
+  <div>
+    <h1>Gestión de Productos</h1>
+    <p class="admin-sub">Administrá el catálogo de la tienda</p>
+  </div>
+  <div class="admin-header-actions">
+    <a href="<?= BASE_URL ?>/admin/categoria" class="btn btn-outline">Categorías</a>
+    <a href="<?= BASE_URL ?>/admin/producto/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
+  </div>
+</div>
+
+<?php if (empty($productos)): ?>
+  <div class="empty-state">
+    <p>No hay productos cargados. <a href="<?= BASE_URL ?>/admin/producto/nuevo">Agregar el primero</a>.</p>
+  </div>
+<?php else: ?>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($productos as $p): ?>
+          <tr>
+            <td class="td-id"><?= $p['id_producto'] ?></td>
+            <td>
+              <strong><?= htmlspecialchars($p['nombre']) ?></strong>
+            </td>
+            <td><span class="badge"><?= htmlspecialchars($p['categoria_nombre'] ?? '—') ?></span></td>
+            <td>$<?= number_format((float) $p['precio'], 2, ',', '.') ?></td>
+            <td class="<?= $p['stock'] > 0 ? 'td-ok' : 'td-warn' ?>"><?= $p['stock'] ?></td>
+            <td class="td-actions">
+              <a href="<?= BASE_URL ?>/productos/detalle?id=<?= $p['id_producto'] ?>" class="btn btn-sm btn-ghost"
+                title="Ver">👁</a>
+              <a href="<?= BASE_URL ?>/admin/productos/editar?id=<?= $p['id_producto'] ?>"
+                class="btn btn-sm btn-outline">Editar</a>
+              <a href="<?= BASE_URL ?>/admin/productos/eliminar?id=<?= $p['id_producto'] ?>" class="btn btn-sm btn-danger"
+                onclick="return confirm('¿Eliminar este producto?')">Eliminar</a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+<?php endif; ?>
+
+<?php require __DIR__ . '/../componentes/footer.phtml'; ?>
