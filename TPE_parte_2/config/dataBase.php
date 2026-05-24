@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/claves.php';
 
 class Database
 {
@@ -83,7 +83,7 @@ class Database
         email      VARCHAR(100) NOT NULL UNIQUE,
         password   VARCHAR(255) NOT NULL,
         es_admin   TINYINT(1) DEFAULT 1,
-        telefono   INT
+        telefono   VARCHAR(20)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   ");
   }

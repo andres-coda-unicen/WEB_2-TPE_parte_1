@@ -2,9 +2,9 @@
 session_start();
 
 require_once __DIR__ . '/config/database.php';
-require_once __DIR__ . '/app/controllers/ProductoController.php';
-require_once __DIR__ . '/app/controllers/CategoriaController.php';
-require_once __DIR__ . '/app/controllers/AuthController.php';
+require_once __DIR__ . '/app/controller/ProductoController.php';
+require_once __DIR__ . '/app/controller/CategoriaController.php';
+require_once __DIR__ . '/app/controller/AuthController.php';
 
 // ─── Router ───────────────────────────────────────────────────────────────────
 // Obtener la ruta desde el query string generado por .htaccess
