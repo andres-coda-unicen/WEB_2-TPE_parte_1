@@ -20,7 +20,7 @@ class CategoriaController
   public function index(): void
   {
     $categorias = $this->categoriaModelo->obtenerTodas();
-    require __DIR__ . '/../paginas/categorias/listado.phtml';
+    require __DIR__ . '/../paginas/categoria/listado.phtml';
   }
 
   /** GET /categorias/productos?id=X — Productos de una categoría */
@@ -28,7 +28,7 @@ class CategoriaController
   {
     $id = filter_var($id, FILTER_VALIDATE_INT);
     if (!$id) {
-      $this->redirigir('/categorias');
+      $this->redirigir('/categoria');
       return;
     }
 
@@ -39,7 +39,7 @@ class CategoriaController
     }
 
     $productos = $this->productoModelo->obtenerPorCategoria((int) $id);
-    require __DIR__ . '/../paginas/categorias/productos_categoria.phtml';
+    require __DIR__ . '/../paginas/categoria/producto_categoria.phtml';
   }
 
   // ── Admin ─────────────────────────────────────────────────────────────────
@@ -49,14 +49,14 @@ class CategoriaController
   {
     Auth::requireAdmin();
     $categorias = $this->categoriaModelo->obtenerTodas();
-    require __DIR__ . '/../paginas/categorias/admin_listado.phtml';
+    require __DIR__ . '/../paginas/categoria/admin_listado.phtml';
   }
 
   /** GET /admin/categorias/nueva */
   public function nueva(): void
   {
     Auth::requireAdmin();
-    require __DIR__ . '/../paginas/categorias/form.phtml';
+    require __DIR__ . '/../paginas/categoria/form.phtml';
   }
 
   /** POST /admin/categorias/guardar */
@@ -64,20 +64,20 @@ class CategoriaController
   {
     Auth::requireAdmin();
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      $this->redirigir('/admin/categorias');
+      $this->redirigir('/admin/categoria');
       return;
     }
 
     $datos = $this->sanitizarFormulario($_POST);
     if (empty($datos['nombre'])) {
       $_SESSION['error'] = 'El nombre de la categoría es obligatorio.';
-      $this->redirigir('/admin/categorias/nueva');
+      $this->redirigir('/admin/categoria/nueva');
       return;
     }
 
     $this->categoriaModelo->insertar($datos);
     $_SESSION['exito'] = 'Categoría agregada correctamente.';
-    $this->redirigir('/admin/categorias');
+    $this->redirigir('/admin/categoria');
   }
 
   /** GET /admin/categorias/editar?id=X */
@@ -92,11 +92,11 @@ class CategoriaController
 
     $categoria = $this->categoriaModelo->obtenerPorId((int) $id);
     if (!$categoria) {
-      $this->redirigir('/admin/categorias');
+      $this->redirigir('/admin/categoria');
       return;
     }
 
-    require __DIR__ . '/../paginas/categorias/form.phtml';
+    require __DIR__ . '/../paginas/categoria/form.phtml';
   }
 
   /** POST /admin/categorias/actualizar */
@@ -104,7 +104,7 @@ class CategoriaController
   {
     Auth::requireAdmin();
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      $this->redirigir('/admin/categorias');
+      $this->redirigir('/admin/categoria');
       return;
     }
 
@@ -113,13 +113,13 @@ class CategoriaController
 
     if (!$id || empty($datos['nombre'])) {
       $_SESSION['error'] = 'Datos inválidos.';
-      $this->redirigir('/admin/categorias/editar?id=' . $id);
+      $this->redirigir('/admin/categoria/editar?id=' . $id);
       return;
     }
 
     $this->categoriaModelo->actualizar((int) $id, $datos);
     $_SESSION['exito'] = 'Categoría actualizada correctamente.';
-    $this->redirigir('/admin/categorias');
+    $this->redirigir('/admin/categoria');
   }
 
   /** GET /admin/categorias/eliminar?id=X */
@@ -131,7 +131,7 @@ class CategoriaController
       $this->categoriaModelo->eliminar((int) $id);
       $_SESSION['exito'] = 'Categoría eliminada.';
     }
-    $this->redirigir('/admin/categorias');
+    $this->redirigir('/admin/categoria');
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────

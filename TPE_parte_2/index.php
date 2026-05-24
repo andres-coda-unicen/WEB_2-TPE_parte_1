@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/config/dataBase.php';
 require_once __DIR__ . '/app/controller/ProductoController.php';
 require_once __DIR__ . '/app/controller/CategoriaController.php';
 require_once __DIR__ . '/app/controller/AuthController.php';
@@ -21,7 +21,7 @@ $rutas = [
   '/producto' => fn() => $productoCtrl->index(),
   '/producto/detalle' => fn() => $productoCtrl->detalle($_GET['id'] ?? null),
   '/categoria' => fn() => $categoriaCtrl->index(),
-  '/categoria/productos' => fn() => $categoriaCtrl->productosPorCategoria($_GET['id'] ?? null),
+  '/categoria/producto' => fn() => $categoriaCtrl->productosPorCategoria($_GET['id'] ?? null),
 
   // Auth
   '/login' => fn() => $authCtrl->loginForm(),

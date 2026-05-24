@@ -22,11 +22,11 @@
         <span>Tienda<strong>Online</strong></span>
       </a>
       <nav class="main-nav">
-        <a href="<?= BASE_URL ?>/productos">Productos</a>
-        <a href="<?= BASE_URL ?>/categorias">Categorías</a>
+        <a href="<?= BASE_URL ?>/producto">Productos</a>
+        <a href="<?= BASE_URL ?>/categoria">Categorías</a>
         <?php if (Auth::estaLogueado()): ?>
           <span class="nav-divider">|</span>
-          <a href="<?= BASE_URL ?>/admin/productos" class="nav-admin">Admin</a>
+          <a href="<?= BASE_URL ?>/admin/producto" class="nav-admin">Admin</a>
           <a href="<?= BASE_URL ?>/logout" class="nav-logout">Salir</a>
         <?php else: ?>
           <a href="<?= BASE_URL ?>/login" class="nav-login">Admin</a>

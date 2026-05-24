@@ -19,7 +19,7 @@ class ProductoController
   /** GET /producto — Listado público de todos los producto */
   public function index(): void
   {
-    $producto = $this->productoModelo->obtenerTodos();
+    $productos = $this->productoModelo->obtenerTodos();
     $categorias = $this->categoriaModelo->obtenerTodas();
     require __DIR__ . '/../paginas/producto/listado.phtml';
   }
