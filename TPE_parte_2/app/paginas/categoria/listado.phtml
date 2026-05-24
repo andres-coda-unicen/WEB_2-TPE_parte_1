@@ -1,0 +1,36 @@
+<?php $pageTitle = 'Categorías'; ?>
+<?php require __DIR__ . '/../componentes/header.phtml'; ?>
+
+<section class="page-hero">
+  <h1>Categorías</h1>
+  <p>Explorá los productos por categoría</p>
+</section>
+
+<?php if (empty($categorias)): ?>
+  <div class="empty-state">
+    <p>No hay categorías cargadas todavía.</p>
+  </div>
+<?php else: ?>
+  <div class="categories-grid">
+    <?php foreach ($categorias as $cat): ?>
+      <a href="<?= BASE_URL ?>/categorias/productos?id=<?= $cat['id_categoria'] ?>" class="category-card">
+        <div class="category-image">
+          <?php if (!empty($cat['imagen_url'])): ?>
+            <img src="<?= htmlspecialchars($cat['imagen_url']) ?>" alt="<?= htmlspecialchars($cat['nombre']) ?>">
+          <?php else: ?>
+            <div class="category-placeholder">🗂️</div>
+          <?php endif; ?>
+        </div>
+        <div class="category-body">
+          <h3><?= htmlspecialchars($cat['nombre']) ?></h3>
+          <?php if (!empty($cat['descripcion'])): ?>
+            <p><?= htmlspecialchars($cat['descripcion']) ?></p>
+          <?php endif; ?>
+          <span class="cat-count"><?= $cat['cantidad_productos'] ?> productos</span>
+        </div>
+      </a>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+
+<?php require __DIR__ . '/../componentes/footer.phtml'; ?>
