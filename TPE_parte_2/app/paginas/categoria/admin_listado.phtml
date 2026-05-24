@@ -1,0 +1,62 @@
+<?php $pageTitle = 'Admin — Categorías'; ?>
+<?php require __DIR__ . '/../componentes/header.phtml'; ?>
+
+<div class="admin-header">
+  <div>
+    <h1>Gestión de Categorías</h1>
+    <p class="admin-sub">Administrá las categorías del catálogo</p>
+  </div>
+  <div class="admin-header-actions">
+    <a href="<?= BASE_URL ?>/admin/producto" class="btn btn-outline">Productos</a>
+    <a href="<?= BASE_URL ?>/admin/categoria/nueva" class="btn btn-primary">+ Nueva Categoría</a>
+  </div>
+</div>
+
+<?php if (empty($categorias)): ?>
+  <div class="empty-state">
+    <p>No hay categorías. <a href="<?= BASE_URL ?>/admin/categoria/nueva">Crear la primera</a>.</p>
+  </div>
+<?php else: ?>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Productos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($categorias as $cat): ?>
+          <tr>
+            <td class="td-id">
+              <?= $cat['id_categoria'] ?>
+            </td>
+            <td><strong>
+                <?= htmlspecialchars($cat['nombre']) ?>
+              </strong></td>
+            <td>
+              <?= htmlspecialchars(mb_strimwidth($cat['descripcion'] ?? '—', 0, 60, '…')) ?>
+            </td>
+            <td>
+              <?= $cat['cantidad_productos'] ?>
+            </td>
+            <td class="td-actions">
+              <a href="<?= BASE_URL ?>/categorias/producto?id=<?= $cat['id_categoria'] ?>" class="btn btn-sm btn-ghost"
+                title="Ver">👁</a>
+              <a href="<?= BASE_URL ?>/admin/categoria/editar?id=<?= $cat['id_categoria'] ?>"
+                class="btn btn-sm btn-outline">Editar</a>
+              <a href="<?= BASE_URL ?>/admin/categoria/eliminar?id=<?= $cat['id_categoria'] ?>"
+                class="btn btn-sm btn-danger"
+                onclick="return confirm('¿Eliminar esta categoría y sus productos?')">Eliminar</a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+<?php endif; ?>
+
+<?php require __DIR__ . '/../componentes/footer.phtml'; ?>
