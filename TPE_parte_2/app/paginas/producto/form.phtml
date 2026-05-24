@@ -1,5 +1,5 @@
 <?php
-$editando = isset($producto);
+$editando = isset($productos);
 $pageTitle = $editando ? 'Editar Producto' : 'Nuevo Producto';
 ?>
 <?php require __DIR__ . '/../componentes/header.phtml'; ?>
@@ -68,7 +68,7 @@ $pageTitle = $editando ? 'Editar Producto' : 'Nuevo Producto';
     <!-- Preview de imagen -->
     <?php if (!empty($producto['imagen_url'])): ?>
       <div class="form-preview">
-        <img src="<?= htmlspecialchars($producto['imagen_url']) ?>" alt="Preview">
+        <img src="<?= htmlspecialchars($productos['imagen_url']) ?>" alt="Preview">
       </div>
     <?php endif; ?>
 
