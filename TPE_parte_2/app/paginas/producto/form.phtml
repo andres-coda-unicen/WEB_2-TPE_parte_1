@@ -15,13 +15,13 @@ $pageTitle = $editando ? 'Editar Producto' : 'Nuevo Producto';
     class="form-card">
 
     <?php if ($editando): ?>
-      <input type="hidden" name="id_producto" value="<?= $producto['id_producto'] ?>">
+      <input type="hidden" name="id_producto" value="<?= $productos['id_producto'] ?>">
     <?php endif; ?>
 
     <div class="form-row">
       <div class="form-group">
         <label for="nombre">Nombre del producto *</label>
-        <input type="text" id="nombre" name="nombre" required value="<?= htmlspecialchars($producto['nombre'] ?? '') ?>"
+        <input type="text" id="nombre" name="nombre" required value="<?= htmlspecialchars($productos['nombre'] ?? '') ?>"
           placeholder="Ej: Auriculares Bluetooth">
       </div>
 
@@ -30,7 +30,7 @@ $pageTitle = $editando ? 'Editar Producto' : 'Nuevo Producto';
         <select id="id_categoria" name="id_categoria" required>
           <option value="">— Seleccioná una categoría —</option>
           <?php foreach ($categorias as $cat): ?>
-            <option value="<?= $cat['id_categoria'] ?>" <?= isset($producto) && $producto['id_categoria'] == $cat['id_categoria'] ? 'selected' : '' ?>>
+            <option value="<?= $cat['id_categoria'] ?>" <?= isset($productos) && $productos['id_categoria'] == $cat['id_categoria'] ? 'selected' : '' ?>>
               <?= htmlspecialchars($cat['nombre']) ?>
             </option>
           <?php endforeach; ?>
@@ -41,32 +41,32 @@ $pageTitle = $editando ? 'Editar Producto' : 'Nuevo Producto';
     <div class="form-group">
       <label for="descripcion">Descripción</label>
       <textarea id="descripcion" name="descripcion" rows="4"
-        placeholder="Describí el producto..."><?= htmlspecialchars($producto['descripcion'] ?? '') ?></textarea>
+        placeholder="Describí el producto..."><?= htmlspecialchars($productos['descripcion'] ?? '') ?></textarea>
     </div>
 
     <div class="form-row">
       <div class="form-group">
         <label for="precio">Precio (ARS) *</label>
         <input type="number" id="precio" name="precio" step="0.01" min="0" required
-          value="<?= $producto['precio'] ?? '' ?>" placeholder="0.00">
+          value="<?= $productos['precio'] ?? '' ?>" placeholder="0.00">
       </div>
 
       <div class="form-group">
         <label for="stock">Stock disponible *</label>
-        <input type="number" id="stock" name="stock" min="0" required value="<?= $producto['stock'] ?? '0' ?>"
+        <input type="number" id="stock" name="stock" min="0" required value="<?= $productos['stock'] ?? '0' ?>"
           placeholder="0">
       </div>
     </div>
 
     <div class="form-group">
       <label for="imagen_url">URL de imagen</label>
-      <input type="url" id="imagen_url" name="imagen_url" value="<?= htmlspecialchars($producto['imagen_url'] ?? '') ?>"
+      <input type="url" id="imagen_url" name="imagen_url" value="<?= htmlspecialchars($productos['imagen_url'] ?? '') ?>"
         placeholder="https://ejemplo.com/imagen.jpg">
       <span class="form-hint">Ingresá la URL de la imagen del producto.</span>
     </div>
 
     <!-- Preview de imagen -->
-    <?php if (!empty($producto['imagen_url'])): ?>
+    <?php if (!empty($productos['imagen_url'])): ?>
       <div class="form-preview">
         <img src="<?= htmlspecialchars($productos['imagen_url']) ?>" alt="Preview">
       </div>

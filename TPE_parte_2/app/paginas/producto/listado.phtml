@@ -12,7 +12,7 @@
     Todo
   </a>
   <?php foreach ($categorias as $cat): ?>
-    <a href="<?= BASE_URL ?>/categorias/producto?id=<?= $cat['id_categoria'] ?>" class="filter-chip">
+    <a href="<?= BASE_URL ?>/categoria/producto?id=<?= $cat['id_categoria'] ?>" class="filter-chip">
       <?= htmlspecialchars($cat['nombre']) ?>
     </a>
   <?php endforeach; ?>

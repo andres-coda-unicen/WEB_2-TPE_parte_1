@@ -48,7 +48,7 @@ class ProductoController
   public function adminIndex(): void
   {
     Auth::requireAdmin();
-    $producto = $this->productoModelo->obtenerTodos();
+    $productos = $this->productoModelo->obtenerTodos();
     require __DIR__ . '/../paginas/producto/admin_listado.phtml';
   }
 

@@ -13,7 +13,7 @@
 <?php else: ?>
   <div class="categories-grid">
     <?php foreach ($categorias as $cat): ?>
-      <a href="<?= BASE_URL ?>/categorias/productos?id=<?= $cat['id_categoria'] ?>" class="category-card">
+      <a href="<?= BASE_URL ?>/categoria/producto?id=<?= $cat['id_categoria'] ?>" class="category-card">
         <div class="category-image">
           <?php if (!empty($cat['imagen_url'])): ?>
             <img src="<?= htmlspecialchars($cat['imagen_url']) ?>" alt="<?= htmlspecialchars($cat['nombre']) ?>">
