@@ -1,0 +1,30 @@
+<?php $pageTitle = 'Acceso Administrador'; ?>
+<?php require __DIR__ . '/../componentes/header.phtml'; ?>
+
+<section class="auth-section">
+  <div class="auth-card">
+    <div class="auth-header">
+      <span class="auth-icon">🔐</span>
+      <h1>Acceso Administrador</h1>
+      <p>Ingresá con tu cuenta para gestionar el contenido del sitio.</p>
+    </div>
+
+    <form method="POST" action="<?= BASE_URL ?>/login/procesar" class="auth-form">
+      <div class="form-group">
+        <label for="email">Usuario</label>
+        <input type="text" id="email" name="email" placeholder="webadmin" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+    </form>
+
+    <div class="auth-back">
+      <a href="<?= BASE_URL ?>/">← Volver a la tienda</a>
+    </div>
+  </div>
+</section>
+
+<?php require __DIR__ . '/../componentes/footer.phtml'; ?>
