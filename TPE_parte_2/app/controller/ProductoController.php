@@ -16,97 +16,97 @@ class ProductoController
 
   // ── Públicas ──────────────────────────────────────────────────────────────
 
-  /** GET /productos — Listado público de todos los productos */
+  /** GET /producto — Listado público de todos los producto */
   public function index(): void
   {
-    $productos = $this->productoModelo->obtenerTodos();
+    $producto = $this->productoModelo->obtenerTodos();
     $categorias = $this->categoriaModelo->obtenerTodas();
-    require __DIR__ . '/../paginas/productos/listado.phtml';
+    require __DIR__ . '/../paginas/producto/listado.phtml';
   }
 
-  /** GET /productos/detalle?id=X — Detalle de un producto */
+  /** GET /producto/detalle?id=X — Detalle de un producto */
   public function detalle(?string $id): void
   {
     $id = filter_var($id, FILTER_VALIDATE_INT);
     if (!$id) {
-      $this->redirigir('/productos');
+      $this->redirigir('/producto');
       return;
     }
 
     $producto = $this->productoModelo->obtenerPorId((int) $id);
     if (!$producto) {
-      $this->redirigir('/productos');
+      $this->redirigir('/producto');
       return;
     }
 
-    require __DIR__ . '/../paginas/productos/detalle.phtml';
+    require __DIR__ . '/../paginas/producto/detalle.phtml';
   }
 
   // ── Admin ─────────────────────────────────────────────────────────────────
 
-  /** GET /admin/productos — Listado admin */
+  /** GET /admin/producto — Listado admin */
   public function adminIndex(): void
   {
     Auth::requireAdmin();
-    $productos = $this->productoModelo->obtenerTodos();
-    require __DIR__ . '/../paginas/productos/admin_listado.phtml';
+    $producto = $this->productoModelo->obtenerTodos();
+    require __DIR__ . '/../paginas/producto/admin_listado.phtml';
   }
 
-  /** GET /admin/productos/nuevo — Formulario de alta */
+  /** GET /admin/producto/nuevo — Formulario de alta */
   public function nuevo(): void
   {
     Auth::requireAdmin();
     $categorias = $this->categoriaModelo->obtenerTodas();
-    require __DIR__ . '/../paginas/productos/form.phtml';
+    require __DIR__ . '/../paginas/producto/form.phtml';
   }
 
-  /** POST /admin/productos/guardar — Procesar alta */
+  /** POST /admin/producto/guardar — Procesar alta */
   public function guardar(): void
   {
     Auth::requireAdmin();
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      $this->redirigir('/admin/productos');
+      $this->redirigir('/admin/producto');
       return;
     }
 
     $datos = $this->sanitizarFormulario($_POST);
     if (!$this->validar($datos)) {
       $_SESSION['error'] = 'Todos los campos obligatorios deben completarse.';
-      $this->redirigir('/admin/productos/nuevo');
+      $this->redirigir('/admin/producto/nuevo');
       return;
     }
 
     $this->productoModelo->insertar($datos);
     $_SESSION['exito'] = 'Producto agregado correctamente.';
-    $this->redirigir('/admin/productos');
+    $this->redirigir('/admin/producto');
   }
 
-  /** GET /admin/productos/editar?id=X — Formulario de edición */
+  /** GET /admin/producto/editar?id=X — Formulario de edición */
   public function editar(?string $id): void
   {
     Auth::requireAdmin();
     $id = filter_var($id, FILTER_VALIDATE_INT);
     if (!$id) {
-      $this->redirigir('/admin/productos');
+      $this->redirigir('/admin/producto');
       return;
     }
 
     $producto = $this->productoModelo->obtenerPorId((int) $id);
     $categorias = $this->categoriaModelo->obtenerTodas();
     if (!$producto) {
-      $this->redirigir('/admin/productos');
+      $this->redirigir('/admin/producto');
       return;
     }
 
-    require __DIR__ . '/../paginas/productos/form.phtml';
+    require __DIR__ . '/../paginas/producto/form.phtml';
   }
 
-  /** POST /admin/productos/actualizar — Procesar edición */
+  /** POST /admin/producto/actualizar — Procesar edición */
   public function actualizar(): void
   {
     Auth::requireAdmin();
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      $this->redirigir('/admin/productos');
+      $this->redirigir('/admin/producto');
       return;
     }
 
@@ -115,16 +115,16 @@ class ProductoController
 
     if (!$id || !$this->validar($datos)) {
       $_SESSION['error'] = 'Datos inválidos.';
-      $this->redirigir('/admin/productos/editar?id=' . $id);
+      $this->redirigir('/admin/producto/editar?id=' . $id);
       return;
     }
 
     $this->productoModelo->actualizar((int) $id, $datos);
     $_SESSION['exito'] = 'Producto actualizado correctamente.';
-    $this->redirigir('/admin/productos');
+    $this->redirigir('/admin/producto');
   }
 
-  /** GET /admin/productos/eliminar?id=X — Eliminar producto */
+  /** GET /admin/producto/eliminar?id=X — Eliminar producto */
   public function eliminar(?string $id): void
   {
     Auth::requireAdmin();
@@ -133,7 +133,7 @@ class ProductoController
       $this->productoModelo->eliminar((int) $id);
       $_SESSION['exito'] = 'Producto eliminado.';
     }
-    $this->redirigir('/admin/productos');
+    $this->redirigir('/admin/producto');
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
