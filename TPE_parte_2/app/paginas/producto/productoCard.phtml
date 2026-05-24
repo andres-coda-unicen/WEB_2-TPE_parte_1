@@ -1,0 +1,30 @@
+<article class="product-card">
+  <a href="<?= BASE_URL ?>/producto/detalle?id=<?= $p['id_producto'] ?>" class="card-link">
+    <div class="card-image">
+      <?php if (!empty($p['imagen_url'])): ?>
+        <img src="<?= htmlspecialchars($p['imagen_url']) ?>" alt="<?= htmlspecialchars($p['nombre']) ?>">
+      <?php else: ?>
+        <div class="card-placeholder">🛍️</div>
+      <?php endif; ?>
+    </div>
+    <div class="card-body">
+      <span class="card-category">
+        <?= htmlspecialchars($p['categoria_nombre'] ?? 'Sin categoría') ?>
+      </span>
+      <h3 class="card-title">
+        <?= htmlspecialchars($p['nombre']) ?>
+      </h3>
+      <p class="card-desc">
+        <?= htmlspecialchars(mb_strimwidth($p['descripcion'] ?? '', 0, 80, '…')) ?>
+      </p>
+      <div class="card-footer">
+        <span class="price">$
+          <?= number_format((float) $p['precio'], 2, ',', '.') ?>
+        </span>
+        <span class="stock <?= $p['stock'] > 0 ? 'in-stock' : 'no-stock' ?>">
+          <?= $p['stock'] > 0 ? 'En stock' : 'Sin stock' ?>
+        </span>
+      </div>
+    </div>
+  </a>
+</article>
