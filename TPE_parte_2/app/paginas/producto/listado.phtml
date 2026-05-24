@@ -8,11 +8,11 @@
 
 <!-- Filtro por categoría -->
 <div class="filter-bar">
-  <a href="<?= BASE_URL ?>/productos" class="filter-chip <?= !isset($_GET['cat']) ? 'active' : '' ?>">
+  <a href="<?= BASE_URL ?>/producto" class="filter-chip <?= !isset($_GET['cat']) ? 'active' : '' ?>">
     Todo
   </a>
   <?php foreach ($categorias as $cat): ?>
-    <a href="<?= BASE_URL ?>/categorias/productos?id=<?= $cat['id_categoria'] ?>" class="filter-chip">
+    <a href="<?= BASE_URL ?>/categorias/producto?id=<?= $cat['id_categoria'] ?>" class="filter-chip">
       <?= htmlspecialchars($cat['nombre']) ?>
     </a>
   <?php endforeach; ?>
@@ -24,9 +24,9 @@
   </div>
 <?php else: ?>
   <div class="products-grid">
-    <?php foreach ($productos as $p): ?>
+    <?php foreach ($producto as $p): ?>
       <article class="product-card">
-        <a href="<?= BASE_URL ?>/productos/detalle?id=<?= $p['id_producto'] ?>" class="card-link">
+        <a href="<?= BASE_URL ?>/producto/detalle?id=<?= $p['id_producto'] ?>" class="card-link">
           <div class="card-image">
             <?php if (!empty($p['imagen_url'])): ?>
               <img src="<?= htmlspecialchars($p['imagen_url']) ?>" alt="<?= htmlspecialchars($p['nombre']) ?>">
