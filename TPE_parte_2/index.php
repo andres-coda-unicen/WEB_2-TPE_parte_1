@@ -18,10 +18,10 @@ $authCtrl = new AuthController();
 // Rutas públicas
 $rutas = [
   '/' => fn() => $productoCtrl->index(),
-  '/productos' => fn() => $productoCtrl->index(),
-  '/productos/detalle' => fn() => $productoCtrl->detalle($_GET['id'] ?? null),
-  '/categorias' => fn() => $categoriaCtrl->index(),
-  '/categorias/productos' => fn() => $categoriaCtrl->productosPorCategoria($_GET['id'] ?? null),
+  '/producto' => fn() => $productoCtrl->index(),
+  '/producto/detalle' => fn() => $productoCtrl->detalle($_GET['id'] ?? null),
+  '/categoria' => fn() => $categoriaCtrl->index(),
+  '/categoria/productos' => fn() => $categoriaCtrl->productosPorCategoria($_GET['id'] ?? null),
 
   // Auth
   '/login' => fn() => $authCtrl->loginForm(),
@@ -29,20 +29,20 @@ $rutas = [
   '/logout' => fn() => $authCtrl->logout(),
 
   // Admin — productos
-  '/admin/productos' => fn() => $productoCtrl->adminIndex(),
-  '/admin/productos/nuevo' => fn() => $productoCtrl->nuevo(),
-  '/admin/productos/guardar' => fn() => $productoCtrl->guardar(),
-  '/admin/productos/editar' => fn() => $productoCtrl->editar($_GET['id'] ?? null),
-  '/admin/productos/actualizar' => fn() => $productoCtrl->actualizar(),
-  '/admin/productos/eliminar' => fn() => $productoCtrl->eliminar($_GET['id'] ?? null),
+  '/admin/producto' => fn() => $productoCtrl->adminIndex(),
+  '/admin/producto/nuevo' => fn() => $productoCtrl->nuevo(),
+  '/admin/producto/guardar' => fn() => $productoCtrl->guardar(),
+  '/admin/producto/editar' => fn() => $productoCtrl->editar($_GET['id'] ?? null),
+  '/admin/producto/actualizar' => fn() => $productoCtrl->actualizar(),
+  '/admin/producto/eliminar' => fn() => $productoCtrl->eliminar($_GET['id'] ?? null),
 
   // Admin — categorías
-  '/admin/categorias' => fn() => $categoriaCtrl->adminIndex(),
-  '/admin/categorias/nueva' => fn() => $categoriaCtrl->nueva(),
-  '/admin/categorias/guardar' => fn() => $categoriaCtrl->guardar(),
-  '/admin/categorias/editar' => fn() => $categoriaCtrl->editar($_GET['id'] ?? null),
-  '/admin/categorias/actualizar' => fn() => $categoriaCtrl->actualizar(),
-  '/admin/categorias/eliminar' => fn() => $categoriaCtrl->eliminar($_GET['id'] ?? null),
+  '/admin/categoria' => fn() => $categoriaCtrl->adminIndex(),
+  '/admin/categoria/nueva' => fn() => $categoriaCtrl->nueva(),
+  '/admin/categoria/guardar' => fn() => $categoriaCtrl->guardar(),
+  '/admin/categoria/editar' => fn() => $categoriaCtrl->editar($_GET['id'] ?? null),
+  '/admin/categoria/actualizar' => fn() => $categoriaCtrl->actualizar(),
+  '/admin/categoria/eliminar' => fn() => $categoriaCtrl->eliminar($_GET['id'] ?? null),
 ];
 
 if (array_key_exists($ruta, $rutas)) {
