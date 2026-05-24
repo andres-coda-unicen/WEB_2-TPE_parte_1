@@ -1,0 +1,55 @@
+<?php
+$editando = isset($categoria);
+$pageTitle = $editando ? 'Editar Categoría' : 'Nueva Categoría';
+?>
+<?php require __DIR__ . '/../componentes/header.phtml'; ?>
+
+<div class="form-page">
+  <div class="form-page-header">
+    <a href="<?= BASE_URL ?>/admin/categoria" class="btn btn-ghost">← Volver</a>
+    <h1><?= $editando ? 'Editar Categoría' : 'Nueva Categoría' ?></h1>
+  </div>
+
+  <form method="POST"
+    action="<?= BASE_URL . ($editando ? '/admin/categoria/actualizar' : '/admin/categorias/guardar') ?>"
+    class="form-card">
+
+    <?php if ($editando): ?>
+      <input type="hidden" name="id_categoria" value="<?= $categoria['id_categoria'] ?>">
+    <?php endif; ?>
+
+    <div class="form-group">
+      <label for="nombre">Nombre de la categoría *</label>
+      <input type="text" id="nombre" name="nombre" required value="<?= htmlspecialchars($categoria['nombre'] ?? '') ?>"
+        placeholder="Ej: Electrónica">
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion" rows="3"
+        placeholder="Breve descripción de la categoría..."><?= htmlspecialchars($categoria['descripcion'] ?? '') ?></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="imagen_url">URL de imagen</label>
+      <input type="url" id="imagen_url" name="imagen_url"
+        value="<?= htmlspecialchars($categoria['imagen_url'] ?? '') ?>" placeholder="https://ejemplo.com/imagen.jpg">
+      <span class="form-hint">Ingresá la URL de una imagen representativa de la categoría.</span>
+    </div>
+
+    <?php if (!empty($categoria['imagen_url'])): ?>
+      <div class="form-preview">
+        <img src="<?= htmlspecialchars($categoria['imagen_url']) ?>" alt="Preview">
+      </div>
+    <?php endif; ?>
+
+    <div class="form-actions">
+      <a href="<?= BASE_URL ?>/admin/categorias" class="btn btn-secondary">Cancelar</a>
+      <button type="submit" class="btn btn-primary">
+        <?= $editando ? 'Guardar cambios' : 'Crear categoría' ?>
+      </button>
+    </div>
+  </form>
+</div>
+
+<?php require __DIR__ . '/../componentes/footer.phtml'; ?>
