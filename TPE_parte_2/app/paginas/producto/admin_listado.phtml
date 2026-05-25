@@ -40,7 +40,7 @@
             <td>$<?= number_format((float) $p['precio'], 2, ',', '.') ?></td>
             <td class="<?= $p['stock'] > 0 ? 'td-ok' : 'td-warn' ?>"><?= $p['stock'] ?></td>
             <td class="td-actions">
-              <a href="<?= BASE_URL ?>/productos/detalle?id=<?= $p['id_producto'] ?>" class="btn btn-sm btn-ghost"
+              <a href="<?= BASE_URL ?>/producto/detalle?id=<?= $p['id_producto'] ?>" class="btn btn-sm btn-ghost"
                 title="Ver">👁</a>
               <a href="<?= BASE_URL ?>/admin/producto/editar?id=<?= $p['id_producto'] ?>"
                 class="btn btn-sm btn-outline">Editar</a>
