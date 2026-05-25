@@ -36,7 +36,7 @@ class AuthController
       $_SESSION['usuario_id'] = $usuario['id_usuario'];
       $_SESSION['usuario_email'] = $usuario['email'];
       $_SESSION['es_admin'] = true;
-      $this->redirigir('/admin/productos');
+      $this->redirigir('/admin/producto');
     } else {
       $_SESSION['error'] = 'Usuario o contraseña incorrectos.';
       $this->redirigir('/login');
